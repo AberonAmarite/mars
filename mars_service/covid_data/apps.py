@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class WomenConfig(AppConfig):
+class CovidDataConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'women'
+    name = 'covid_data'

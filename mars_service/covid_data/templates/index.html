@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>COVID data</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+<div id="chart-container"></div>
+
+<script>
+let json_data = JSON.parse('{{ data|safe }}');
+
+  // Access and use json_data in your JavaScript code
+
+    const deathValues = [];
+  const hospitalizedValues = [];
+
+  // Iterate through json_data and construct arrays
+  for (const [key, value] of Object.entries(json_data)) {
+      deathValues.push({ x: new Date(key), y: value.death });
+  hospitalizedValues.push({ x: new Date(key), y: value.hospitalized });
+  }
+  console.log(json_data);          // Verify the parsed data
+console.log(deathValues);        // Verify the deathValues array
+console.log(hospitalizedValues);
+  // Construct the data array for D3.js chart
+  const data = [
+    { series: "Death", values: deathValues },
+    { series: "Hospitalized", values: hospitalizedValues }
+    // Add more series and values as needed
+  ];
+
+  const width = 600;
+  const height = 400;
+  const margin = { top: 20, right: 30, bottom: 30, left: 60 };
+
+  const svg = d3.select("#chart-container")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+ const xScale = d3.scaleTime()
+  .domain(d3.extent(deathValues, d => d.x))
+  .range([margin.left, width - margin.right]);
+
+  const yScale = d3.scaleLinear()
+    .domain([0, d3.max(data, d => d3.max(d.values, v => v.y))])
+    .range([height - margin.bottom, margin.top]);
+
+  const line = d3.line()
+    .x(d => xScale(d.x))
+    .y(d => yScale(d.y));
+
+  data.forEach(d => {
+    svg.append("path")
+      .datum(d.values)
+      .attr("fill", "none")
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", 2)
+      .attr("d", line);
+  });
+
+  // Add x-axis
+svg.append("g")
+  .attr("transform", `translate(0, ${height - margin.bottom})`)
+  .call(d3.axisBottom(xScale));
+
+ svg.append("g")
+  .attr("transform", `translate(${margin.left}, 0)`)
+  .call(d3.axisLeft(yScale));
+</script>
+
+</body>
+</html>
