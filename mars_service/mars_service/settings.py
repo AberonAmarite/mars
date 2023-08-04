@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-*^h@-d5w_yne*=mhskmbj=#8krlqcndexd7sab_ht44e4)1o&!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
@@ -38,10 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    'users.apps.UsersConfig',
-    'covid_data'
+    'covid_data',
+    'authuser'
 ]
-AUTH_USER_MODEL = 'users.CustomUser' # new
+AUTH_USER_MODEL = 'authuser.User'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
