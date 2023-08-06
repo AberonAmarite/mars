@@ -1,18 +1,15 @@
 from datetime import datetime
-
-
 from django.http import JsonResponse
-from django.shortcuts import render
-
-# Create your views here.
 from django.shortcuts import render, get_object_or_404, redirect
-
-from authuser.forms import NewUserForm
 from covid_data.models import CovidData
 from .forms import NewDataForm  # Import your new form
+from django.contrib.auth.decorators import user_passes_test
 
+def is_admin(user):
+    return user.is_superuser
+@user_passes_test(is_admin)
 def admin_panel(request):
-    items = CovidData.objects.all()[:30]
+    items = CovidData.objects.all()
     return render(request, 'panel.html', {'items': items})
 
 
@@ -37,7 +34,6 @@ def update_item(request, pk):
     return redirect('admin_panel')
 
 def delete_item(request, pk):
-    print("pk is ", pk)
     item = get_object_or_404(CovidData, pk=pk)
     item.delete()
     return redirect('admin_panel')

@@ -43,6 +43,12 @@ INSTALLED_APPS = [
     'admin_panel'
 ]
 AUTH_USER_MODEL = 'authuser.User'
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

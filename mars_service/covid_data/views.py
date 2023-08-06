@@ -4,6 +4,8 @@ import json
 from covid_data.models import CovidData
 
 def index(request): #HttpRequest
+    if not request.user.is_authenticated:
+        return redirect('login')
     covid_data_objects = CovidData.objects.all()[:30]  # Retrieve the first 30 objects
     data = {}
 
@@ -14,7 +16,6 @@ def index(request): #HttpRequest
         }
 
     json_data = json.dumps(data)
-    print(json_data + "Hello")
     return render(request, 'index.html', {'title': 'Bitle', 'data': json_data})
 
 def pageNotFound(request, exception):

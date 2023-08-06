@@ -17,8 +17,13 @@
               <label for="password">Password:</label>
               <input type="password" class="form-control" id="password" name="password" required>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <div class="d-flex justify-content-around">
+               <button type="submit" class="btn btn-primary">Login</button>
+            <a href="{% url 'register' %}" class="btn btn-secondary">Register</a>
+            </div>
+
           </form>
+
         </div>
       </div>
     </div>
