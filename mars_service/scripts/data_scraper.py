@@ -18,26 +18,8 @@ def get_data_from_api():
         CovidData.objects.create(
             date=parse_datetime(item["dateChecked"]),
             death=item["death"],
-            death_increase=item["deathIncrease"],
             hospitalized=item["hospitalized"],
-            hospitalized_cumulative=item["hospitalizedCumulative"],
-            hospitalized_currently=item["hospitalizedCurrently"],
-            hospitalized_increase=item["hospitalizedIncrease"],
-            in_icu_cumulative=item["inIcuCumulative"],
-            in_icu_currently=item["inIcuCurrently"],
-            negative=item["negative"],
-            negative_increase=item["negativeIncrease"],
-            on_ventilator_cumulative=item["onVentilatorCumulative"],
-            on_ventilator_currently=item["onVentilatorCurrently"],
-            pending=item["pending"],
-            pos_neg=item["posNeg"],
             positive=item["positive"],
-            positive_increase=item["positiveIncrease"],
-            recovered=item["recovered"],
-            states=item["states"],
-            total=item["total"],
-            total_test_results=item["totalTestResults"],
-            total_test_results_increase=item["totalTestResultsIncrease"],
         )
     return data
 

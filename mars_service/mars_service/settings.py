@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'covid_data',
-    'authuser'
+    'authuser',
+    'admin_panel'
 ]
 AUTH_USER_MODEL = 'authuser.User'
 MIDDLEWARE = [

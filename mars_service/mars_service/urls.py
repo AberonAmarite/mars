@@ -19,10 +19,13 @@ from django.contrib import admin
 from covid_data.views import *
 from django.urls import path, include
 
+from admin_panel.views import admin_panel
+
 urlpatterns = [
     path('', include('covid_data.urls')),
     path('', include('authuser.urls')),
     path('admin/', admin.site.urls),
+    path('', include('admin_panel.urls')),
 ]
 
 handler404 = pageNotFound

@@ -31,8 +31,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=255, blank=True, default='')
 
     is_active = models.BooleanField(default=True)
-    is_superuser = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=True)
+    is_superuser = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 
